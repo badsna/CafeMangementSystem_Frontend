@@ -17,7 +17,9 @@ import { error } from 'console';
 export class LoginComponent implements OnInit {
 hide=true;
 loginForm:any=FormGroup;
+
 responseMessage:any;
+
   constructor(
     private formBuilder:FormBuilder,
     private router: Router,
@@ -38,9 +40,12 @@ responseMessage:any;
     this.ngxService.start();
     var formData=this.loginForm.value;
     var data={
-      email:formData.password
+      email:formData.email,
+      password:formData.password
     }
-    this.userService.forgotLogin(data).subscribe((response:any)=>{
+
+    console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"+formData.password)
+    this.userService.login(data).subscribe((response:any)=>{
       this.ngxService.stop();
       this.dialogRef.close();
       // we need to store jwt token in local Storage

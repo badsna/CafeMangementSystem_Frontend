@@ -14,12 +14,13 @@ import { MaterialModule } from './shared/material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from './shared/shared.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader'
 import { UserService } from './services/user.service';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
+import { TokenInterceptorInterceptor } from './services/token-interceptor.interceptor';
 const ngUiLoaderConfig:NgxUiLoaderConfig={
   text:"Loading...",
   textColor:"#FFFFFF",
@@ -55,7 +56,7 @@ const ngUiLoaderConfig:NgxUiLoaderConfig={
    HttpClientModule,
    NgxUiLoaderModule.forRoot(ngUiLoaderConfig)
   ],
-  providers: [],
+  providers: [HttpClientModule,{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

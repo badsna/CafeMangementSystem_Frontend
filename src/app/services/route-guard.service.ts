@@ -15,21 +15,20 @@ export class RouteGuardService {
     private snackbarService: SnackbarService) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    let expectedRoleArray = route.data;
-    expectedRoleArray = expectedRoleArray.expectRole;
+    const expectedRoleArray = route.data.expectRole;
 
-    const token: any = localStorage.getItem("token");
+    const token: any = localStorage.getItem('token');
 
     var tokenPayload: any;
     try {
-      tokenPayload: jwt_decode(token);
+      tokenPayload=jwt_decode(token);
     }
     catch (err) {
       localStorage.clear();
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }
 
-    let expectedRole="";
+    let expectedRole='';
 
     for(let i=0;i<expectedRoleArray.length;i++){
       if(expectedRoleArray[i]==tokenPayload.role){

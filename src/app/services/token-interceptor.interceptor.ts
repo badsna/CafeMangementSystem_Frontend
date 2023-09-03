@@ -17,14 +17,20 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token=localStorage.getItem('token');
     if(token){
-      request=request.clone({
-        setHeaders:{Authorization:'Bearer $(token)'}
+      request = request.clone({
+        setHeaders: { Authorization: `Bearer ${token}` }
       });
+      
     }
+    console.log('Request URL:', request.url);
+  console.log('Request Headers:', request.headers);
+
+  console.log('Token '+token);
+  
     return next.handle(request).pipe(
       catchError ((err)=>{
         if(err instanceof HttpErrorResponse){
-          console.log(err.url);
+          console.log("hello"+err.url);
           if(err.status===401 || err.status===403){
             if(this.router.url==='/'){}
             else{

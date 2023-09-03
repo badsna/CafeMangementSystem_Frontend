@@ -30,6 +30,8 @@ responseMessage:any;
   ) { }
 
   ngOnInit(): void {
+    console.log("Login component initialized");
+
     this.loginForm=this.formBuilder.group({
       email:[null,[Validators.required,Validators.pattern(GlobalConstants.emailRegex)]],
       password:[null,[Validators.required]]
@@ -37,6 +39,8 @@ responseMessage:any;
   }
 
   handleSubmit(){
+    console.log("Login component initialized");
+
     this.ngxService.start();
     var formData=this.loginForm.value;
     var data={
@@ -44,10 +48,10 @@ responseMessage:any;
       password:formData.password
     }
 
-    console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"+formData.password)
     this.userService.login(data).subscribe((response:any)=>{
       this.ngxService.stop();
       this.dialogRef.close();
+      console.log("Login successful. Token received:", response.token);
       // we need to store jwt token in local Storage
       localStorage.setItem('token',response.token);
       //if jwt token is correct or  authenticated

@@ -20,6 +20,7 @@ import { NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER } from 'ngx-ui-loader'
 import { UserService } from './services/user.service';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { TokenInterceptorInterceptor } from './services/token-interceptor.interceptor';
 const ngUiLoaderConfig:NgxUiLoaderConfig={
   text:"Loading...",
@@ -42,8 +43,7 @@ const ngUiLoaderConfig:NgxUiLoaderConfig={
     AppSidebarComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    LoginComponent 
-   ],
+    LoginComponent    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -56,7 +56,9 @@ const ngUiLoaderConfig:NgxUiLoaderConfig={
    HttpClientModule,
    NgxUiLoaderModule.forRoot(ngUiLoaderConfig)
   ],
-  providers: [HttpClientModule,{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorInterceptor,multi:true}],
+  providers: [
+    HttpClientModule,{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

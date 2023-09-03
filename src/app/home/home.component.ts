@@ -20,11 +20,16 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    console.log("Home component initialized");
     this.userService.checkToken().subscribe((response:any)=>{
+      console.log("Response came from checkToken");
+
       this.router.navigate(['/cafe/dashboard']);
     },(error:any)=>{
+      console.log("Error occurred while checking token");
      console.log(error);
     })
+    
   }
 
   handleSignupAction(){
@@ -40,7 +45,7 @@ export class HomeComponent implements OnInit {
   }
 
   handleLoginAction(){
-    console.log("handle login");
+    console.log("Handling Login Action");
     const dialogConfig=new MatDialogConfig();
     dialogConfig.width='550px';
     this.dialog.open(LoginComponent,dialogConfig);

@@ -7,11 +7,11 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   constructor(
-    private router:Router) { }
+    private router:Router
+    ) { }
 
   public isAuthenticated():boolean{
-    const token=localStorage.getItem("token");
-    console.log("helooooooooo authservice"+token)
+    const token=localStorage.getItem('token');
     if(!token){
       this.router.navigate(["/"]);
       return false;

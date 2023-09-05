@@ -50,4 +50,12 @@ export class UserService {
       })
     );
   }
+
+  changePassword(data:any){
+    return this.httpClient.post(this.url+
+      "/user/changePassword",data,{
+        headers:new HttpHeaders().set('Content-Type','application/json')
+      })
+  }
+  
 }

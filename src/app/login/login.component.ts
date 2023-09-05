@@ -58,6 +58,9 @@ responseMessage:any;
       this.router.navigate(['/cafe/dashboard']);
 
     },(error)=>{
+      //to stop loading when the error occurs
+      this.ngxService.stop();
+      
       if(error.error?.message){
         this.responseMessage=error.error?.message;
       }

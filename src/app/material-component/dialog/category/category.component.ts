@@ -17,7 +17,8 @@ export class CategoryComponent implements OnInit {
   dialogAction: any = "Add";
   action: any = "Add";
 
-  responseMessgae: any;
+  responseMessage: any;
+
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData: any,
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
@@ -52,18 +53,18 @@ export class CategoryComponent implements OnInit {
     this.categoryService.add(data).subscribe((response: any) => {
       this.dialogRef.close();
       this.onAddCategory.emit();
-      this.responseMessgae = response.message;
-      this.snackbarService.openSnackBar(this.responseMessgae, "success");
+      this.responseMessage = response.message;
+      this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error) => {
       this.dialogRef.close();
       console.error(error);
       if (error.error?.message) {
-        this.responseMessgae = error.error?.message;
+        this.responseMessage = error.error?.message;
       }
       else {
-        this.responseMessgae = GlobalConstants.genericError;
+        this.responseMessage = GlobalConstants.genericError;
       }
-      this.snackbarService.openSnackBar(this.responseMessgae, GlobalConstants.error);
+      this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     });
   }
 
@@ -79,18 +80,18 @@ export class CategoryComponent implements OnInit {
 
       //emit calls the this.tableData() from manage-category.components.ts
       this.onAddCategory.emit();
-      this.responseMessgae = response.message;
-      this.snackbarService.openSnackBar(this.responseMessgae, "success");
+      this.responseMessage = response.message;
+      this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error) => {
       this.dialogRef.close();
       console.error(error);
       if (error.error?.message) {
-        this.responseMessgae = error.error?.message;
+        this.responseMessage = error.error?.message;
       }
       else {
-        this.responseMessgae = GlobalConstants.genericError;
+        this.responseMessage = GlobalConstants.genericError;
       }
-      this.snackbarService.openSnackBar(this.responseMessgae, GlobalConstants.error);
+      this.snackbarService.openSnackBar(this.responseMessage, GlobalConstants.error);
     });
    }
 

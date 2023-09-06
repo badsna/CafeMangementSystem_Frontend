@@ -57,5 +57,14 @@ export class UserService {
         headers:new HttpHeaders().set('Content-Type','application/json')
       })
   }
+
+  getUsers(){
+    return this.httpClient.get(this.url+"/user/getAll");
+  }
+  update(data:any){
+    return this.httpClient.post(this.url+"/user/update",data,{
+      headers:new HttpHeaders().set('Content-Type',"application/json")
+    })
+  }
   
 }

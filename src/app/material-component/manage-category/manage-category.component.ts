@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource,MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { error } from 'console';
 import { NgxUiLoaderService } from 'ngx-ui-loader';

@@ -28,4 +28,8 @@ url=environment.apiUrl;
     return this.httpClient.get(this.url
       +"/category/getAll")
   }
+
+  getFilterCategorys(){
+    return this.httpClient.get(this.url+"/category/getAll?filterValue=true");
+  }
 }

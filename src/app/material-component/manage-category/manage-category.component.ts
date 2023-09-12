@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatTableDataSource,MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { error } from 'console';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -59,33 +59,37 @@ export class ManageCategoryComponent implements OnInit {
 
   handleAddAction() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data={
-      action:'Add'
+    dialogConfig.data = {
+      action: 'Add'
     };
-   
+
     dialogConfig.width = "550px";
-    const dialogRef = this.dialog.open(CategoryComponent,dialogConfig);
-    this.router.events.subscribe(()=>{
+   
+    //dialog ma categoryComponent ko form kholdinxa
+    const dialogRef = this.dialog.open(CategoryComponent, dialogConfig);
+    
+    //listen to the emitter in onAddCategory for real time refereshing of data in table
+    this.router.events.subscribe(() => {
       dialogRef.close();
     });
-    const sub=dialogRef.componentInstance.onAddCategory.subscribe((response)=>{
+    const sub = dialogRef.componentInstance.onAddCategory.subscribe((response) => {
       this.tableData();
     })
   }
 
   handleEditAction(values: any) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.data={
-      action:'Edit',
-      data:values
+    dialogConfig.data = {
+      action: 'Edit',
+      data: values
     };
-   
+
     dialogConfig.width = "550px";
-    const dialogRef = this.dialog.open(CategoryComponent,dialogConfig);
-    this.router.events.subscribe(()=>{
+    const dialogRef = this.dialog.open(CategoryComponent, dialogConfig);
+    this.router.events.subscribe(() => {
       dialogRef.close();
     });
-    const sub=dialogRef.componentInstance.onAddCategory.subscribe((response)=>{
+    const sub = dialogRef.componentInstance.onAddCategory.subscribe((response) => {
       this.tableData();
     })
 

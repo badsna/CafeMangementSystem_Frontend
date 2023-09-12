@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.signupForm = this.formBulider.group(
       {
-        // bracket ma yaad garnu parxa
+        //initial value and validators
         name: [null, [Validators.required,Validators.pattern(GlobalConstants.nameRegex)]],
         email:[null,[Validators.required,Validators.pattern(GlobalConstants.emailRegex)]],
         contactNumber:[null,[Validators.required,Validators.pattern(GlobalConstants.contactNumberRegex)]],
@@ -42,6 +42,7 @@ export class SignupComponent implements OnInit {
         confirmPassword:[null,[Validators.required]]
       });
   }
+
   validateSubmit(){
     if(this.signupForm.controls['password'].value != this.signupForm.controls['confirmPassword'].value){
       return true;
@@ -67,21 +68,28 @@ export class SignupComponent implements OnInit {
     this.userService.signup(data).subscribe(
       //everything is good
       (response:any)=>{
+
       this.ngService.stop();
       this.dialogRef.close();
       this.responseMessage=response?.message;
+
+      //opening snackbar with responseMessage
       this.snackbarService.openSnackBar(this.responseMessage,"");
       this.router.navigate(['/']);
     },
-    //something is wrong
+    //something is wrong while making http request
     (error)=>{
       this.ngService.stop();
+      //if error message in response to http request
       if(error.error?.message){
         this.responseMessage=error.error?.message;
       }
+
+      //if no error message in response
       else{
         this.responseMessage=GlobalConstants.genericError;
       }
+      
       this.snackbarService.openSnackBar(this.responseMessage,GlobalConstants.error);
     })
      }

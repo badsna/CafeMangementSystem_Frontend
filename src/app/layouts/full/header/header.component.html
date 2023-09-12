@@ -1,5 +1,8 @@
-<button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-5">
-    <mat-icon>account_circle</mat-icon>
+<button [matMenuTriggerFor]="profile" mat-icon-button class="m-r-10">
+    <div class="user-info" #userInfoRef>
+  <mat-icon>account_circle</mat-icon>
+  <span>{{userName}}</span> 
+    </div>
 </button>
 <mat-menu #profile="matMenu" class="mymegamenu">
     <button mat-mwnu-item (click)="changePassword()">

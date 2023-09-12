@@ -31,9 +31,10 @@ export class TokenInterceptorInterceptor implements HttpInterceptor {
       catchError((err) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401 || err.status === 403) {
+            localStorage.clear();
+            this.router.navigate(['/']);
 
             if (this.router.url === '/') {
-              console.log("Navigating to root");
             }
             else {
               localStorage.clear();

@@ -22,7 +22,7 @@ export class ProductComponent implements OnInit {
 
   responseMessage: any;
   onEmitStatusChange: any;
-  
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: any,
     private formBuilder: FormBuilder,
@@ -43,7 +43,6 @@ export class ProductComponent implements OnInit {
     if (this.dialogData.action === 'Edit') {
       this.dialogAction = 'Edit';
       this.action = "Update";
-      console.log(this.productForm.patchValue(this.dialogData.data));
       this.productForm.patchValue(this.dialogData.data);
     }
     this.getCategorys();
@@ -53,9 +52,8 @@ export class ProductComponent implements OnInit {
     this.categoryService.getCategory().subscribe((response: any) => {
       this.categorys = response;
     }, (error) => {
-      console.log(error);
       if (error.error?.message) {
-      
+
         this.responseMessage = error.error?.message;
       }
       else {
@@ -78,11 +76,10 @@ export class ProductComponent implements OnInit {
     var formData = this.productForm.value;
     var data = {
       name: formData.name,
-      categoryId:formData.categoryId,
-      price:formData.price,
-      description:formData.description
+      categoryId: formData.categoryId,
+      price: formData.price,
+      description: formData.description
     }
-console.log(data.description+" "+data.categoryId+""+data.name+""+data.price)
 
     this.productService.add(data).subscribe((response: any) => {
       this.dialogRef.close();
@@ -91,7 +88,6 @@ console.log(data.description+" "+data.categoryId+""+data.name+""+data.price)
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error) => {
       this.dialogRef.close();
-      console.error(error);
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       }
@@ -105,11 +101,11 @@ console.log(data.description+" "+data.categoryId+""+data.name+""+data.price)
   edit() {
     var formData = this.productForm.value;
     var data = {
-      id:this.dialogData.data.id,
+      id: this.dialogData.data.id,
       name: formData.name,
-      categoryId:formData.categoryId,
-      price:formData.price,
-      description:formData.description
+      categoryId: formData.categoryId,
+      price: formData.price,
+      description: formData.description
     }
 
     this.productService.update(data).subscribe((response: any) => {
@@ -119,7 +115,6 @@ console.log(data.description+" "+data.categoryId+""+data.name+""+data.price)
       this.snackbarService.openSnackBar(this.responseMessage, "success");
     }, (error) => {
       this.dialogRef.close();
-      console.error(error);
       if (error.error?.message) {
         this.responseMessage = error.error?.message;
       }

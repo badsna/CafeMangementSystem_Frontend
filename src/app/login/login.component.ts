@@ -6,8 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { SnackbarService } from '../services/snackbar.service';
 import { GlobalConstants } from '../shared/global-constants';
-import { tokenName } from '@angular/compiler';
-import { error } from 'console';
+
 
 @Component({
   selector: 'app-login',
@@ -30,7 +29,6 @@ responseMessage:any;
   ) { }
 
   ngOnInit(): void {
-    console.log("Login component initialized");
 
     this.loginForm=this.formBuilder.group({
       email:[null,[Validators.required,Validators.pattern(GlobalConstants.emailRegex)]],
@@ -39,7 +37,6 @@ responseMessage:any;
   }
 
   handleSubmit(){
-    console.log("Login component initialized");
 
     this.ngxService.start();
     var formData=this.loginForm.value;
@@ -51,13 +48,15 @@ responseMessage:any;
     this.userService.login(data).subscribe((response:any)=>{
       this.ngxService.stop();
       this.dialogRef.close();
-      console.log("Login successful. Token received:", response.token);
+
       // we need to store jwt token in local Storage
       localStorage.setItem('token',response.token);
+     
       //if jwt token is correct or  authenticated
       this.router.navigate(['/cafe/dashboard']);
 
     },(error)=>{
+    
       //to stop loading when the error occurs
       this.ngxService.stop();
       

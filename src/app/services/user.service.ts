@@ -22,7 +22,7 @@ export class UserService {
 
   forgotPassword(data:any){
     return this.httpClient.post(this.url+
-      "/user/forgotPassword",data,{
+      "/resetToken/generate",data,{
         headers:new HttpHeaders().set('Content-Type','application/json')
       })
   }
@@ -35,14 +35,17 @@ export class UserService {
   }
   
   checkToken(): Observable<any> {
+    
     return this.httpClient.get(this.url + '/user/checkToken').pipe(
       catchError((error: any) => {
+       
         // Handle the error response here
         if (error.status === 401) {
-          console.log("hello checkToken")
+        
           // Throw a custom exception for unauthorized access
           throw new DOMException('Unauthorized access. Please log in.');
         } else {
+          
           // Handle other error cases or return a different custom exception
           // You can customize this based on your backend response structure
           throw new DOMException('An error occurred while checking the token.');
@@ -65,6 +68,10 @@ export class UserService {
     return this.httpClient.post(this.url+"/user/update",data,{
       headers:new HttpHeaders().set('Content-Type',"application/json")
     })
+  }
+
+  getUserDetails(){
+    return this.httpClient.get(this.url+"/user/get");
   }
   
 }

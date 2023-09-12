@@ -39,12 +39,15 @@ responseMessage: any;
       var data = {
         email: formData.email
       }
+
       this.userService.forgotPassword(data).subscribe((response: any) => {
+
         this.ngxService.stop();
         this.responseMessage = response?.message;
         this.dialogRef.close();
         this.snackbarService.openSnackBar(this.responseMessage, "");
-      }, (error) => {
+      },
+       (error) => {
         this.ngxService.stop();
         if (error.error?.message) {
           this.responseMessage = error.error?.message;

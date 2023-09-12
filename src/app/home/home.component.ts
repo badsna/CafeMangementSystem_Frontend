@@ -6,6 +6,7 @@ import { LoginComponent } from '../login/login.component';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { error, log } from 'console';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -20,13 +21,10 @@ export class HomeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log("Home component initialized");
+    //Direct to cafe/dashboard if token is available
     this.userService.checkToken().subscribe((response:any)=>{
-      console.log("Response came from checkToken");
-
       this.router.navigate(['/cafe/dashboard']);
     },(error:any)=>{
-      console.log("Error occurred while checking token");
      console.log(error);
     })
     
@@ -35,19 +33,22 @@ export class HomeComponent implements OnInit {
   handleSignupAction(){
     const dialogConfig=new MatDialogConfig();
     dialogConfig.width='550px';
+    //opening Signup form as dialog
     this.dialog.open(SignupComponent,dialogConfig);
   }
 
   handleForgotPasswordAction(){
     const dialogConfig=new MatDialogConfig();
     dialogConfig.width='550px';
+        //opening ForgotPassword form as dialog
     this.dialog.open(ForgotPasswordComponent,dialogConfig);
   }
 
   handleLoginAction(){
-    console.log("Handling Login Action");
     const dialogConfig=new MatDialogConfig();
     dialogConfig.width='550px';
+        //opening Login form as dialog
     this.dialog.open(LoginComponent,dialogConfig);
   }
+
 }

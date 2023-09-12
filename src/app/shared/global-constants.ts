@@ -5,6 +5,8 @@ export class GlobalConstants{
 
     public static unauthorized:string="You are not authorized person to  access this page";
 
+    public static invalidToken: string="Token has been expired";
+
     public static productExistsError:string="Product already exists";
 
     public static productAdded:string="Product added successfully";

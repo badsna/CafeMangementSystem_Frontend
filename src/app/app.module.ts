@@ -22,6 +22,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TokenInterceptorInterceptor } from './services/token-interceptor.interceptor';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 const ngUiLoaderConfig:NgxUiLoaderConfig={
   text:"Loading...",
   textColor:"#FFFFFF",
@@ -43,7 +44,8 @@ const ngUiLoaderConfig:NgxUiLoaderConfig={
     AppSidebarComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    LoginComponent    ],
+    LoginComponent,
+    ResetPasswordComponent    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
